@@ -1,87 +1,385 @@
-<!DOCTYPE html><html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>...</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Don't Believe His Lies</title>
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background: black;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 100%);
   color: #0f0;
-  font-family: monospace;
+  font-family: 'Courier New', monospace;
   text-align: center;
-  padding: 40px;
+  padding: 40px 20px;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
-.hidden {
-  color: black;
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
 }
-button {
-  background: black;
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+  letter-spacing: 3px;
+  animation: flicker 3s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.puzzle-box {
+  background: rgba(0, 20, 0, 0.8);
+  border: 2px solid #0f0;
+  border-radius: 5px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+.cipher-section {
+  margin: 20px 0;
+  padding: 15px;
+  background: rgba(0, 10, 0, 0.6);
+  border-left: 3px solid #0f0;
+  text-align: left;
+  border-radius: 3px;
+}
+
+.cipher-title {
+  color: #00ff00;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.cipher-content {
+  font-size: 1.1em;
+  line-height: 1.8;
+  word-wrap: break-word;
+}
+
+pre {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  border-radius: 3px;
+  overflow-x: auto;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.input-section {
+  margin: 30px 0;
+}
+
+input {
+  background: rgba(0, 0, 0, 0.8);
   color: #0f0;
-  border: 1px solid #0f0;
-  padding: 10px;
+  border: 2px solid #0f0;
+  padding: 12px 15px;
+  margin-top: 15px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  font-size: 1em;
+  font-family: 'Courier New', monospace;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+  border-color: #00ff00;
+}
+
+button {
+  background: rgba(0, 0, 0, 0.8);
+  color: #0f0;
+  border: 2px solid #0f0;
+  padding: 12px 30px;
+  margin-top: 15px;
   cursor: pointer;
+  font-size: 1em;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+button:hover {
+  background: #0f0;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 1.2em;
+  min-height: 30px;
+  color: #0f0;
+  text-shadow: 0 0 10px #0f0;
+}
+
+.result-correct {
+  color: #00ff00;
+  text-shadow: 0 0 20px #00ff00;
+}
+
+.result-incorrect {
+  color: #ff0000;
+  text-shadow: 0 0 10px #ff0000;
+}
+
+.hidden-section {
+  display: none;
+}
+
+.hidden-section.visible {
+  display: block;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-message {
+  font-size: 1.3em;
+  margin: 20px 0;
+  padding: 20px;
+  border: 2px solid #0f0;
+  border-radius: 5px;
+}
+
+.hint-button {
+  background: rgba(0, 100, 0, 0.6);
+  margin-top: 20px;
+  padding: 8px 15px;
+  font-size: 0.9em;
+}
+
+.hint-button:hover {
+  background: rgba(0, 150, 0, 0.8);
+}
+
+.hint {
+  margin-top: 15px;
+  padding: 15px;
+  background: rgba(0, 50, 0, 0.7);
+  border-left: 3px solid #0f0;
+  text-align: left;
+  display: none;
+  border-radius: 3px;
+}
+
+.hint.visible {
+  display: block;
+}
+
+.morse {
+  letter-spacing: 4px;
+}
+
+.binary {
+  letter-spacing: 2px;
+}
+
+.footer {
+  margin-top: 50px;
+  color: #00aa00;
+  font-size: 0.9em;
+  opacity: 0.7;
 }
 </style>
 </head>
-<body><pre>
-DON'T BELIEVE HIS LIES
+<body>
+<div class="container">
+  <h1>DON'T BELIEVE HIS LIES</h1>
+  
+  <div class="puzzle-box">
+    <p style="margin-bottom: 20px; color: #00aa00;">Decifre os códigos abaixo para encontrar a resposta final</p>
+    
+    <div class="cipher-section">
+      <div class="cipher-title">Cifra 1: Números Simples</div>
+      <div class="cipher-content">
+        <pre>11 15 24 33 15</pre>
+      </div>
+    </div>
 
-11 15 24 33 15
-•• •••• ••   •• ••
-ADFGX DFGXA GXADF
-𓂀 𓆣 𓅓 𓏏
-VJKUBKUBCBOGUUCIG
-ᚠ ᚢ ᚦ ᚨ ᚱ
-13-1-7-9-14-1
-⋅–⋅⋅   –––   ⋅⋅–
-ZXCVBNMASDFGHJKLQWERTYUIOP
-19 5 7 18 5 4 15
+    <div class="cipher-section">
+      <div class="cipher-title">Cifra 2: Morse</div>
+      <div class="cipher-content">
+        <pre class="morse">•• •••• ••   •• ••</pre>
+      </div>
+    </div>
 
-23 15 18 4
-111 222 33 4 555
-Δ Λ Ω Ξ
-ᛗᛖᚾᛏᛖ
-3-1-18-3-5-18
-Uifsfmjf
-⠍⠑⠝⠞⠑
+    <div class="cipher-section">
+      <div class="cipher-title">Cifra 3: ADFGX</div>
+      <div class="cipher-content">
+        <pre>ADFGX DFGXA GXADF</pre>
+      </div>
+    </div>
 
-|• •| |• • •| |•|
-[1,7][9,14][1]
-HELLO / KEY: LIE
-4 1 3 2 5
-…---…
+    <div class="cipher-section">
+      <div class="cipher-title">Cifra 4: Substituição</div>
+      <div class="cipher-content">
+        <pre>VJKUBKUBCBOGUUCIG</pre>
+      </div>
+    </div>
 
-P A G I N A +2
-B A C K
-L1V R0
-P@G!N@
+    <div class="cipher-section">
+      <div class="cipher-title">Cifra 5: Posições</div>
+      <div class="cipher-content">
+        <pre>13-1-7-9-14-1</pre>
+      </div>
+    </div>
 
-MENTE
-VERDADE
-SOMBRA
-AREIA
+    <div class="cipher-section">
+      <div class="cipher-title">Cifra 6: Morse (novamente)</div>
+      <div class="cipher-content">
+        <pre class="morse">⋅–⋅⋅   –––   ⋅⋅–</pre>
+      </div>
+    </div>
 
-111000
-000111
-101010
+    <div class="cipher-section">
+      <div class="cipher-title">Cifra 7: Números e Letras</div>
+      <div class="cipher-content">
+        <pre>19 5 7 18 5 4 15</pre>
+      </div>
+    </div>
 
-. .-.. .. . / .. ...
-7777 2 4 4 6 2
-IFBEGRCF
-ANIGAP
+    <div class="cipher-section">
+      <div class="cipher-title">Cifra 8: Múltiplos</div>
+      <div class="cipher-content">
+        <pre>23 15 18 4</pre>
+      </div>
+    </div>
 
-50 41 47 49 4E 41
-P ⊕ 3
-MENTIRA
+    <div class="cipher-section">
+      <div class="cipher-title">Cifra 9: Telefone</div>
+      <div class="cipher-content">
+        <pre>111 222 33 4 555</pre>
+      </div>
+    </div>
 
-PLAYFAIR / KEY: LIES
+    <div class="cipher-section">
+      <div class="cipher-title">Cifra 10: ROT13</div>
+      <div class="cipher-content">
+        <pre>Uifsfmjf</pre>
+      </div>
+    </div>
 
-FINAL:
-1,7,13,21,34,49
-</pre><!-- NEXT: aHR0cHM6Ly9leGFtcGxlLmNvbS9saWU= --><p class="hidden">você não deveria estar lendo isso</p><button onclick="reveal()">...</button>
+    <div class="cipher-section">
+      <div class="cipher-title">Cifra 11: Binary</div>
+      <div class="cipher-content">
+        <pre class="binary">|• •| |• • •| |•|<br>[1,7][9,14][1]</pre>
+      </div>
+    </div>
+
+    <div class="cipher-section">
+      <div class="cipher-title">Cifra 12: Hex</div>
+      <div class="cipher-content">
+        <pre>50 41 47 49 4E 41</pre>
+      </div>
+    </div>
+
+    <div class="cipher-section">
+      <div class="cipher-title">Cifra 13: Sequência Final</div>
+      <div class="cipher-content">
+        <pre>1,7,13,21,34,49</pre>
+      </div>
+    </div>
+
+    <div class="input-section">
+      <h3>Digite a resposta:</h3>
+      <input type="text" id="answer" placeholder="..." autocomplete="off">
+      <button onclick="checkAnswer()">Enviar</button>
+      <button class="hint-button" onclick="toggleHint()">Dica</button>
+    </div>
+
+    <div class="hint" id="hint">
+      <strong>Dica:</strong> Tente decodificar cada cifra. A resposta é uma frase em português com 2 palavras, sem acentos e com espaço no meio.
+    </div>
+
+    <p id="result"></p>
+
+    <div id="success" class="hidden-section">
+      <div class="success-message">
+        <h2>... correto</h2>
+        <p style="margin-top: 15px;">você começou a ver a verdade</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Puzzle criado por jojostore123456-byte</p>
+  </div>
+</div>
 
 <script>
-function reveal(){
-  alert("você ainda acredita...\n\nprocure melhor");
+function checkAnswer(){
+  const input = document.getElementById("answer").value.toLowerCase().trim();
+  const result = document.getElementById("result");
+  const success = document.getElementById("success");
+  
+  if(input === "pagina vazia"){
+    result.textContent = "... correto";
+    result.className = "result-correct";
+    success.classList.add("visible");
+    setTimeout(() => {
+      document.querySelector("h1").style.textShadow = "0 0 20px #00ff00, 0 0 40px #00ff00";
+    }, 500);
+  } else {
+    result.textContent = "você ainda acredita";
+    result.className = "result-incorrect";
+    success.classList.remove("visible");
+  }
 }
-</script></body>
+
+function toggleHint() {
+  const hint = document.getElementById("hint");
+  hint.classList.toggle("visible");
+}
+
+// Allow Enter key to submit
+document.getElementById("answer").addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    checkAnswer();
+  }
+});
+
+// Typewriter effect on load
+window.addEventListener("load", function() {
+  const h1 = document.querySelector("h1");
+  h1.style.animation = "none";
+  setTimeout(() => {
+    h1.style.animation = "flicker 3s infinite";
+  }, 100);
+});
+</script>
+</body>
 </html>
