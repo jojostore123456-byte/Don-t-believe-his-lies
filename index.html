@@ -8,41 +8,49 @@ input { background:black; color:#0f0; border:1px solid #0f0; padding:10px; margi
 button { background:black; color:#0f0; border:1px solid #0f0; padding:10px; margin-left:10px; cursor:pointer; }
 .level { display:none; }
 .active { display:block; }
+#feedback { margin-top:20px; font-size:18px; }
+.correct { color:#0f0; }
+.wrong { color:red; }
 </style>
 </head>
 <body><h1>DON'T BELIEVE HIS LIES</h1><div id="level1" class="level active">
 <pre>
-ZXVhbW9taW5oYW1hZQ==
+56 61 20 61 6d 6f 20 6d 69 6e 68 61 20 6d c3 a3 65
 </pre>
 <input id="input1" placeholder="...">
 <button onclick="check(1,'eu amo minha mãe')">></button>
 </div><div id="level2" class="level">
 <pre>
-YXMgZWxhIGUgbXVpdG8gb2N1cGFkYQ==
+ROT13:
+znf ryn r zhvg bphcnqn
 </pre>
 <input id="input2" placeholder="...">
 <button onclick="check(2,'mas ela é muito ocupada')">></button>
 </div><div id="level3" class="level">
 <pre>
-VG9uIGVsYSBtZSBkZWl4YSBzb3ppbmhvIGVtIGNhc2E=
+Vigenère
+KEY: lie
+TEXT: gmxs qpl xh hmlhx llwmmxz gq jxye
 </pre>
 <input id="input3" placeholder="...">
 <button onclick="check(3,'então ela me deixa sozinho em casa')">></button>
 </div><div id="level4" class="level">
 <pre>
-Uifsfmjf
+⠑⠥ ⠝⠁⠕ ⠛⠕⠎⠞⠁⠧⠁ ⠝⠁⠙⠁ ⠙⠊⠎⠎⠕
 </pre>
 <input id="input4" placeholder="...">
 <button onclick="check(4,'eu não gostava nada disso')">></button>
 </div><div id="level5" class="level">
 <pre>
-•• •••• ••   •• ••
+P ⊕ 3 = S
+?
 </pre>
 <input id="input5" placeholder="...">
 <button onclick="check(5,'porque eu ficava com fome')">></button>
 </div><div id="level6" class="level">
 <pre>
-01000001 01010100 01000101
+61 74 c3 a9 20 65 6c 61 20 76 6f 6c 74 61 72
+(hex invertido)
 </pre>
 <input id="input6" placeholder="...">
 <button onclick="check(6,'até ela voltar')">></button>
@@ -60,25 +68,27 @@ Uifsfmjf
 <button onclick="check(8,'janela')">></button>
 </div><div id="level9" class="level">
 <pre>
-7777 2 4 4 6 2
+NOKIA:
+5 2 66 33 555 2
 </pre>
 <input id="input9" placeholder="...">
 <button onclick="check(9,'janela')">></button>
 </div><div id="level10" class="level">
 <pre>
-ANIGAP
+ANIGAP[::-1]
 </pre>
 <input id="input10" placeholder="...">
 <button onclick="check(10,'pagina')">></button>
 </div><div id="level11" class="level">
 <pre>
-50 41 47 49 4E 41
+BASE64:
+UEFHSU5B
 </pre>
 <input id="input11" placeholder="...">
 <button onclick="check(11,'pagina')">></button>
 </div><div id="level12" class="level">
 <pre>
-P ⊕ 3
+Σ(P=16,A=1...)
 </pre>
 <input id="input12" placeholder="...">
 <button onclick="check(12,'s')">></button>
@@ -91,13 +101,20 @@ ZICVTWQN
 </div><div id="final" class="level">
 <h2>...</h2>
 <p>agora você entende tudo</p>
-</div><script>
+</div><p id="feedback"></p><script>
 function check(level, correct){
   const input = document.getElementById('input'+level).value.toLowerCase().trim();
+  const feedback = document.getElementById('feedback');
+
   if(input === correct){
+    feedback.innerText = 'certo';
+    feedback.className = 'correct';
     document.getElementById('level'+level).classList.remove('active');
     const next = document.getElementById('level'+(level+1)) || document.getElementById('final');
     next.classList.add('active');
+  } else {
+    feedback.innerText = 'errado';
+    feedback.className = 'wrong';
   }
 }
 </script></body>
