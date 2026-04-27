@@ -1,120 +1,57 @@
 <!DOCTYPE html><html lang="pt-br">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>...</title>
 <style>
-body { background:black; color:#0f0; font-family:monospace; text-align:center; padding:40px; }
-input { background:black; color:#0f0; border:1px solid #0f0; padding:10px; margin-top:20px; width:320px; text-align:center; }
+body { background:black; color:#0f0; font-family:monospace; text-align:center; margin:0; }
+.container { max-width:800px; margin:auto; padding:40px; }
+input { background:black; color:#0f0; border:1px solid #0f0; padding:10px; margin-top:20px; width:300px; max-width:90%; text-align:center; }
 button { background:black; color:#0f0; border:1px solid #0f0; padding:10px; margin-left:10px; cursor:pointer; }
 .level { display:none; }
 .active { display:block; }
 #feedback { margin-top:20px; font-size:18px; }
 .correct { color:#0f0; }
 .wrong { color:red; }
-</style>
+img { margin-top:20px; max-width:90%; }@media (max-width:600px){ .container{padding:20px;} pre{font-size:14px;word-break:break-word;} } @media (min-width:1200px){ .container{max-width:1000px;padding:60px;} pre{font-size:18px;} } </style>
+
 </head>
-<body><h1>DON'T BELIEVE HIS LIES</h1><div id="level1" class="level active">
-<pre>
-56 61 20 61 6d 6f 20 6d 69 6e 68 61 20 6d c3 a3 65
-</pre>
-<input id="input1" placeholder="...">
-<button onclick="check(1,'eu amo minha mãe')">></button>
-</div><div id="level2" class="level">
-<pre>
-ROT13:
-znf ryn r zhvg bphcnqn
-</pre>
-<input id="input2" placeholder="...">
-<button onclick="check(2,'mas ela é muito ocupada')">></button>
-</div><div id="level3" class="level">
-<pre>
-Vigenère
-KEY: lie
-TEXT: gmxs qpl xh hmlhx llwmmxz gq jxye
-</pre>
-<input id="input3" placeholder="...">
-<button onclick="check(3,'então ela me deixa sozinho em casa')">></button>
-</div><div id="level4" class="level">
-<pre>
-⠑⠥ ⠝⠁⠕ ⠛⠕⠎⠞⠁⠧⠁ ⠝⠁⠙⠁ ⠙⠊⠎⠎⠕
-</pre>
-<input id="input4" placeholder="...">
-<button onclick="check(4,'eu não gostava nada disso')">></button>
-</div><div id="level5" class="level">
-<pre>
-P ⊕ 3 = S
-?
-</pre>
-<input id="input5" placeholder="...">
-<button onclick="check(5,'porque eu ficava com fome')">></button>
-</div><div id="level6" class="level">
-<pre>
-61 74 c3 a9 20 65 6c 61 20 76 6f 6c 74 61 72
-(hex invertido)
-</pre>
-<input id="input6" placeholder="...">
-<button onclick="check(6,'até ela voltar')">></button>
-</div><div id="level7" class="level">
-<pre>
-13-5-14-20-5
-</pre>
-<input id="input7" placeholder="...">
-<button onclick="check(7,'mente')">></button>
-</div><div id="level8" class="level">
-<pre>
-⠚⠁⠝⠑⠇⠁
-</pre>
-<input id="input8" placeholder="...">
-<button onclick="check(8,'janela')">></button>
-</div><div id="level9" class="level">
-<pre>
-NOKIA:
-5 2 66 33 555 2
-</pre>
-<input id="input9" placeholder="...">
-<button onclick="check(9,'janela')">></button>
-</div><div id="level10" class="level">
-<pre>
-ANIGAP[::-1]
-</pre>
-<input id="input10" placeholder="...">
-<button onclick="check(10,'pagina')">></button>
-</div><div id="level11" class="level">
-<pre>
-BASE64:
-UEFHSU5B
-</pre>
-<input id="input11" placeholder="...">
-<button onclick="check(11,'pagina')">></button>
-</div><div id="level12" class="level">
-<pre>
-Σ(P=16,A=1...)
-</pre>
-<input id="input12" placeholder="...">
-<button onclick="check(12,'s')">></button>
-</div><div id="level13" class="level">
-<pre>
-ZICVTWQN
-</pre>
-<input id="input13" placeholder="...">
-<button onclick="check(13,'mentira')">></button>
-</div><div id="final" class="level">
-<h2>...</h2>
-<p>agora você entende tudo</p>
-</div><p id="feedback"></p><script>
+<body>
+<div class="container">
+<h1>DON'T BELIEVE HIS LIES</h1><div id="level1" class="level active"><pre>56 61 20 61 6d 6f 20 6d 69 6e 68 61 20 6d c3 a3 65</pre><input id="input1"><button onclick="check(1,'eu amo minha mãe')">></button></div>
+<div id="level2" class="level"><pre>ROT13: znf ryn r zhvg bphcnqn</pre><input id="input2"><button onclick="check(2,'mas ela é muito ocupada')">></button></div>
+<div id="level3" class="level"><pre>Vigenère KEY: lie TEXT: gmxs qpl xh hmlhx llwmmxz gq jxye</pre><input id="input3"><button onclick="check(3,'então ela me deixa sozinho em casa')">></button></div>
+<div id="level4" class="level"><pre>⠑⠥ ⠝⠁⠕ ⠛⠕⠎⠞⠁⠧⠁ ⠝⠁⠙⠁ ⠙⠊⠎⠎⠕</pre><input id="input4"><button onclick="check(4,'eu não gostava nada disso')">></button></div>
+<div id="level5" class="level"><pre>P ⊕ 3 = S</pre><input id="input5"><button onclick="check(5,'porque eu fico com fome')">></button></div>
+<div id="level6" class="level"><pre>61 74 c3 a9 20 65 6c 61 20 76 6f 6c 74 61 72</pre><input id="input6"><button onclick="check(6,'até ela voltar')">></button></div>
+<div id="level7" class="level"><pre>13-5-14-20-5</pre><input id="input7"><button onclick="check(7,'e tem o homem da janela')">></button></div>
+<div id="level8" class="level"><pre>⠚⠁⠝⠑⠇⠁</pre><input id="input8"><button onclick="check(8,'ele fica me observando')">></button></div>
+<div id="level9" class="level"><pre>NOKIA: 5 2 66 33 555 2</pre><input id="input9"><button onclick="check(9,'ele não é humano')">></button></div>
+<div id="level10" class="level"><pre>ANIGAP[::-1]</pre><input id="input10"><button onclick="check(10,'ele antes ia embora')">></button></div>
+<div id="level11" class="level"><pre>BASE64: UEFHSU5B</pre><input id="input11"><button onclick="check(11,'mas hoje ele não foi')">></button></div>
+<div id="level12" class="level"><pre>Σ(P=16,A=1...)</pre><input id="input12"><button onclick="check(12,'e matou minha mãe')">></button></div>
+<div id="level13" class="level"><pre>ZICVTWQN</pre><input id="input13"><button onclick="check(13,'agora eu sou o próximo')">></button></div><div id="final" class="level">
+<h2>Você sabe de tudo</h2>
+<p>Agora ele vai atrás de você</p>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKpCzfhINWoyYSZP3zqvo7snYTb5tn4B9Zq1W8v5MbBw&s=10">
+</div><p id="feedback"></p>
+</div><script>
+function showFeedback(text, type){
+  const feedback = document.getElementById('feedback');
+  feedback.innerText = text;
+  feedback.className = type;
+  setTimeout(()=>{ feedback.innerText=''; },3000);
+}
+
 function check(level, correct){
   const input = document.getElementById('input'+level).value.toLowerCase().trim();
-  const feedback = document.getElementById('feedback');
-
   if(input === correct){
-    feedback.innerText = 'certo';
-    feedback.className = 'correct';
+    showFeedback('certo','correct');
     document.getElementById('level'+level).classList.remove('active');
     const next = document.getElementById('level'+(level+1)) || document.getElementById('final');
     next.classList.add('active');
   } else {
-    feedback.innerText = 'errado';
-    feedback.className = 'wrong';
+    showFeedback('errado','wrong');
   }
 }
 </script></body>
